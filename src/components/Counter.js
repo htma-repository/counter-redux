@@ -1,12 +1,14 @@
 import { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+import { counterAction } from "../store/store-redux";
 import classes from "./Counter.module.css";
 
-import { INCRE, DECRE } from "../store/store-redux";
+// import { INCR, DECR } from "../store/store-redux";
 
 const Counter = () => {
-  const store = useSelector((state) => state.value);
-  const toggle = useSelector((state) => state.isShowToggle);
+  const store = useSelector((state) => state.counter.value);
+  const toggle = useSelector((state) => state.counter.isShowToggle);
   const dispatch = useDispatch();
   const [increaseNum, setIncreaseNum] = useState(0);
   // const [isCounter, setIsCounter] = useState(false);
@@ -14,20 +16,20 @@ const Counter = () => {
   const toggleCounterHandler = () => {
     // !isCounter ? setIsCounter(true) : setIsCounter(false);
     !toggle
-      ? dispatch({ type: "TOGGLE", isShown: true })
-      : dispatch({ type: "TOGGLE", isShown: false });
+      ? dispatch(counterAction.isShowToggle(true))
+      : dispatch(counterAction.isShowToggle(false));
   };
 
   const incrementButtonHandler = () => {
-    dispatch({ type: INCRE, newValue: 1 });
+    dispatch(counterAction.increase(1));
   };
 
   const decrementButtonHandler = () => {
-    dispatch({ type: DECRE, newValue: 1 });
+    dispatch(counterAction.decrement(1));
   };
 
   const increaseByNumberButtonHandler = () => {
-    dispatch({ type: "INCREASEBY", newValueBy: +increaseNum });
+    dispatch(counterAction.increase(+increaseNum));
   };
 
   const increaseInputHandler = (event) => {
@@ -93,8 +95,8 @@ export default Counter;
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
-//     increment: () => dispatch({ type: "INCRE", newValue: 1 }),
-//     decrement: () => dispatch({ type: "DECRE", newValue: 1 }),
+//     increment: () => dispatch({ type: "INCR", newValue: 1 }),
+//     decrement: () => dispatch({ type: "DECR", newValue: 1 }),
 //   };
 // };
 
