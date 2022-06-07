@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { counterAction } from "../store/store-redux";
+import { counterAction } from "../store/counter-slice";
 import classes from "./Counter.module.css";
 
 // import { INCR, DECR } from "../store/store-redux";
